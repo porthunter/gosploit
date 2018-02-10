@@ -4,8 +4,8 @@ import "fmt"
 
 type greeting string
 
-func (g greeting) Greet() {
+func (g greeting) Exploit() {
 	fmt.Println("你好宇宙")
 }
 
-var Greeter greeting
+var GosploitModule greeting

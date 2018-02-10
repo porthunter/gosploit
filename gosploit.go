@@ -53,8 +53,8 @@ func worker(id int, jobs <-chan int, results chan<- int) {
     }
 }
 
-type Greeter interface {
-	Greet()
+type GosploitModule interface {
+	Exploit()
 }
 
 func main() {
@@ -95,24 +95,24 @@ func main() {
 	}
 
 	// 2. look up a symbol (an exported function or variable)
-	// in this case, variable Greeter
-	symGreeter, err := plug.Lookup("Greeter")
+	// in this case, variable GosploitModule
+	symGosploitModule, err := plug.Lookup("GosploitModule")
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
 
 	// 3. Assert that loaded symbol is of a desired type
-	// in this case interface type Greeter (defined above)
-	var greeter Greeter
-	greeter, ok := symGreeter.(Greeter)
+	// in this case interface type GosploitModule (defined above)
+	var module GosploitModule
+	module, ok := symGosploitModule.(GosploitModule)
 	if !ok {
 		fmt.Println("unexpected type from module symbol")
 		os.Exit(1)
 	}
 
 	// 4. use the module
-	greeter.Greet()
+	module.Exploit()
 
     lines, err := readLines("../xs2pwn/domains.txt")
     if err != nil {

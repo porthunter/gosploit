@@ -2,11 +2,11 @@ package main
 
 import "fmt"
 
-type greeting string
+type module string
 
-func (g greeting) Greet() {
+func (g module) Exploit() {
 	fmt.Println("Hello Universe")
 }
 
 // exported
-var Greeter greeting
+var GosploitModule module
