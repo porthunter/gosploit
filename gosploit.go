@@ -1,5 +1,5 @@
 package main
-//go build -buildmode=plugin -o eng/eng.so eng/greeter.go
+go build -buildmode=plugin -o modules/test/eng/chi.so modules/test/eng/.go
 
 import (
 	"bufio"
