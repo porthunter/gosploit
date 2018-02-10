@@ -9,6 +9,7 @@ import (
     "os"
 	"github.com/fatih/color"
 	"plugin"
+	tm "github.com/buger/goterm"
 )
 
 var lines []string
@@ -34,6 +35,18 @@ func readLines(path string) ([]string, error) {
 // simulate an expensive task.
 func worker(id int, jobs <-chan int, results chan<- int) {
     for j := range jobs {
+
+		started := j
+		finished := 300
+		// Based on http://golang.org/pkg/text/tabwriter
+		totals := tm.NewTable(0, 10, 5, ' ', 0)
+		fmt.Fprintf(totals, "Time\tStarted\tActive\tFinished\n")
+		fmt.Fprintf(totals, "%s\t%d\t%d\t%d\n", "All", started, started-finished, finished)
+		tm.Println(totals)
+		tm.Flush()
+
+
+
         time.Sleep(time.Second)
         resp, err := http.Get("https://"+lines[j])
         if err != nil {
@@ -58,6 +71,19 @@ type GosploitModule interface {
 }
 
 func main() {
+	tm.Clear() // Clear current screen
+
+	// Create Box with 30% width of current screen, and height of 20 lines
+	box := tm.NewBox(30|tm.PCT, 20, 0)
+
+	// Add some content to the box
+	// Note that you can add ANY content, even tables
+	fmt.Fprint(box, "text in a box")
+
+	// Move Box to approx center of the screen
+	tm.Print(tm.MoveTo(box.String(), 0|tm.PCT, 40|tm.PCT))
+
+	tm.Flush()
 
 	reader := bufio.NewReader(os.Stdin)
 
@@ -111,9 +137,6 @@ func main() {
 		os.Exit(1)
 	}
 
-	// 4. use the module
-	module.Exploit()
-
     lines, err := readLines("../xs2pwn/domains.txt")
     if err != nil {
 		fmt.Println(text)
@@ -135,6 +158,9 @@ func main() {
     // channel to indicate that's all the work we have.
     for j := 1; j <= len(lines); j++ {
         jobs <- j
+		// 4. use the module
+		module.Exploit()
     }
     close(jobs)
+
 }
