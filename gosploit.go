@@ -109,7 +109,6 @@ func main() {
 		mod = "./modules/test/chi/chi.so"
 	default:
 		fmt.Println("don't speak that language")
-		os.Exit(1)
 	}
 
 	// load module
@@ -117,7 +116,6 @@ func main() {
 	plug, err := plugin.Open(mod)
 	if err != nil {
 		fmt.Println(err)
-		os.Exit(1)
 	}
 
 	// 2. look up a symbol (an exported function or variable)
@@ -125,7 +123,6 @@ func main() {
 	symGosploitModule, err := plug.Lookup("GosploitModule")
 	if err != nil {
 		fmt.Println(err)
-		os.Exit(1)
 	}
 
 	// 3. Assert that loaded symbol is of a desired type
@@ -134,7 +131,6 @@ func main() {
 	module, ok := symGosploitModule.(GosploitModule)
 	if !ok {
 		fmt.Println("unexpected type from module symbol")
-		os.Exit(1)
 	}
 
     lines, err := readLines("../xs2pwn/domains.txt")
@@ -160,7 +156,7 @@ func main() {
         jobs <- j
     }
     close(jobs)
-	
+
 	// 4. use the module
 	module.Exploit()
 
