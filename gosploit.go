@@ -158,9 +158,10 @@ func main() {
     // channel to indicate that's all the work we have.
     for j := 1; j <= len(lines); j++ {
         jobs <- j
-		// 4. use the module
-		module.Exploit()
     }
     close(jobs)
+	
+	// 4. use the module
+	module.Exploit()
 
 }
