@@ -15,6 +15,17 @@ import (
 var lines []string
 
 func readLines(path string) ([]string, error) {
+	started := 22
+	finished := 300
+	// Based on http://golang.org/pkg/text/tabwriter
+	totals := tm.NewTable(0, 10, 5, ' ', 0)
+	fmt.Fprintf(totals, "Time\tStarted\tActive\tFinished\n")
+	fmt.Fprintf(totals, "%s\t%d\t%d\t%d\n", "All", started, started-finished, finished)
+	tm.Println(totals)
+	tm.Flush()
+
+
+
   file, err := os.Open(path)
   if err != nil {
     return nil, err
@@ -35,17 +46,6 @@ func readLines(path string) ([]string, error) {
 // simulate an expensive task.
 func worker(id int, jobs <-chan int, results chan<- int) {
     for j := range jobs {
-
-		started := j
-		finished := 300
-		// Based on http://golang.org/pkg/text/tabwriter
-		totals := tm.NewTable(0, 10, 5, ' ', 0)
-		fmt.Fprintf(totals, "Time\tStarted\tActive\tFinished\n")
-		fmt.Fprintf(totals, "%s\t%d\t%d\t%d\n", "All", started, started-finished, finished)
-		tm.Println(totals)
-		tm.Flush()
-
-
 
         time.Sleep(time.Second)
         resp, err := http.Get("https://"+lines[j])
@@ -71,7 +71,37 @@ type GosploitModule interface {
 }
 
 func main() {
+
 	tm.Clear() // Clear current screen
+
+	lines, err := readLines("../xs2pwn/domains.txt")
+	if err != nil {
+
+	}
+
+	// In order to use our pool of workers we need to send
+	// them work and collect their results. We make 2
+	// channels for this.
+	jobs := make(chan int, 100)
+	results := make(chan int, 100)
+
+	// This starts up 3 workers, initially blocked
+	// because there are no jobs yet.
+	for w := 1; w <= 200; w++ {
+		go worker(w, jobs, results)
+	}
+
+	// Here we send 5 `jobs` and then `close` that
+	// channel to indicate that's all the work we have.
+	for j := 1; j <= len(lines); j++ {
+		jobs <- j
+	}
+	close(jobs)
+
+
+
+
+
 
 	// Create Box with 30% width of current screen, and height of 20 lines
 	box := tm.NewBox(30|tm.PCT, 20, 0)
@@ -99,39 +129,7 @@ func main() {
 
 	color.Yellow("gosploit >")
 	text, _ := reader.ReadString('\n')
-	//fmt.Println(text)
-
-	lines, err := readLines("../xs2pwn/domains.txt")
-    if err != nil {
-		fmt.Println(text)
-    }
-
-
-
-	
-
-    // In order to use our pool of workers we need to send
-    // them work and collect their results. We make 2
-    // channels for this.
-    jobs := make(chan int, 100)
-    results := make(chan int, 100)
-
-    // This starts up 3 workers, initially blocked
-    // because there are no jobs yet.
-    for w := 1; w <= 200; w++ {
-        go worker(w, jobs, results)
-    }
-
-    // Here we send 5 `jobs` and then `close` that
-    // channel to indicate that's all the work we have.
-    for j := 1; j <= len(lines); j++ {
-        jobs <- j
-    }
-    close(jobs)
-
-
-
-
+	fmt.Println(text)
 
 	var mod string
 	switch text {
