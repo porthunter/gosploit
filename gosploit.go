@@ -78,9 +78,9 @@ func main() {
 	var mod string
 	switch text {
 	case "english\n":
-		mod = "./eng/eng.so"
+		mod = "./modules/test/eng/eng.so"
 	case "chinese\n":
-		mod = "./chi/chi.so"
+		mod = "./modules/test/chi/chi.so"
 	default:
 		fmt.Println("don't speak that language")
 		os.Exit(1)
