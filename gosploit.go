@@ -9,8 +9,6 @@ import (
     "os"
 	"github.com/fatih/color"
     "./engine"
-	"plugin"
-	"strings"
 )
 
 var lines []string

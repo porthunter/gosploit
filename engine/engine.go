@@ -7,6 +7,8 @@ import (
 	"sync"
 	"time"
 	"github.com/sethgrid/multibar"
+	"plugin"
+	"strings"
 )
 
 func RunGoSploit() {
