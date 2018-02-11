@@ -70,6 +70,9 @@ func main() {
 
 	}
 
+	//Run progress bars
+	engine.ProgressBar()
+
 	// In order to use our pool of workers we need to send
 	// them work and collect their results. We make 2
 	// channels for this.
@@ -103,41 +106,6 @@ func main() {
 
 	color.Yellow("gosploit >")
 	text, _ := reader.ReadString('\n')
-	fmt.Println(text)
-
-	var mod string
-	switch text {
-	case "english\n":
-		mod = "./modules/test/eng/eng.so"
-	case "chinese\n":
-		mod = "./modules/test/chi/chi.so"
-	default:
-		fmt.Println("don't speak that language")
-	}
-
-	// load module
-	// 1. open the so file to load the symbols
-	plug, err := plugin.Open(mod)
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	// 2. look up a symbol (an exported function or variable)
-	// in this case, variable GosploitModule
-	symGosploitModule, err := plug.Lookup("GosploitModule")
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	// 3. Assert that loaded symbol is of a desired type
-	// in this case interface type GosploitModule (defined above)
-	var module GosploitModule
-	module, ok := symGosploitModule.(GosploitModule)
-	if !ok {
-		fmt.Println("unexpected type from module symbol")
-	}
-
-	// 4. use the module
-	module.Exploit()
+	engine.LoadModule(text)
 
 }
