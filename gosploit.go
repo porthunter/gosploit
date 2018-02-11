@@ -62,9 +62,9 @@ type GosploitModule interface {
 
 func main() {
 
-    engine.RunGoSploit()
+    //engine.RunGoSploit()
 
-    fmt.Printf(engine.Reverse("!oG ,olleH"))
+    //fmt.Printf(engine.Reverse("!oG ,olleH"))
 
 	lines, err := readLines("../xs2pwn/domains.txt")
 	if err != nil {
