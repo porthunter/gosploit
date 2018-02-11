@@ -64,6 +64,7 @@ func main() {
 		    shell.Run()
 		default:
 			fmt.Println("can't find module")
+			engine.RunGoSploit()
 		}
 	}
 
