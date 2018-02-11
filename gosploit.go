@@ -38,7 +38,14 @@ func main() {
 		mod, _ := reader.ReadString('\n')
 
 		//Run Module
-		engine.LoadModule(mod)
+		switch mod {
+		case "use test/chi/chi\n":
+			engine.LoadModule(mod)
+		case "shell":
+			mod = "./modules/test/eng/eng.so"
+		default:
+			fmt.Println("can't find module")
+		}
 	}
 
 }
