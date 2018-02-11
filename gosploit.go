@@ -106,6 +106,8 @@ func main() {
 
 	color.Yellow("gosploit >")
 	text, _ := reader.ReadString('\n')
-	engine.LoadModule(text)
+	if text != nil {
+		engine.LoadModule(text)
+	}
 
 }

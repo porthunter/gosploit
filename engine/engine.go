@@ -3,7 +3,6 @@ package engine
 import (
 	"fmt"
 	"os/exec"
-	"bufio"
 	tm "github.com/buger/goterm"
 	"sync"
 	"time"
