@@ -6,6 +6,7 @@ import (
 	"bufio"
     "os"
 	"github.com/fatih/color"
+	"github.com/abiosoft/ishell"
     "./engine"
 )
 
@@ -42,7 +43,24 @@ func main() {
 		case "use test/chi/chi\n":
 			engine.LoadModule(mod)
 		case "shell":
-			mod = "./modules/test/eng/eng.so"
+			// create new shell.
+		    // by default, new shell includes 'exit', 'help' and 'clear' commands.
+		    shell := ishell.New()
+
+		    // display welcome info.
+		    shell.Println("Sample Interactive Shell")
+
+		    // register a function for "greet" command.
+		    shell.AddCmd(&ishell.Cmd{
+		        Name: "greet",
+		        Help: "greet user",
+		        Func: func(c *ishell.Context) {
+		            c.Println("Hello", strings.Join(c.Args, " "))
+		        },
+		    })
+
+		    // run shell
+		    shell.Run()
 		default:
 			fmt.Println("can't find module")
 		}
