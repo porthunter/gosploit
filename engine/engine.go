@@ -6,7 +6,7 @@ import (
 	tm "github.com/buger/goterm"
 	"sync"
 	"time"
-
+	"plugin"
 	"github.com/sethgrid/multibar"
 )
 
