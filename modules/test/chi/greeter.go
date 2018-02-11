@@ -1,12 +1,12 @@
 package main
 
-import {
+import (
 	"time"
 	"bufio"
 	"net/http"
 	"os"
 	"fmt"
-}
+)
 
 
 type greeting string
