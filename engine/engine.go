@@ -8,7 +8,6 @@ import (
 	"time"
 	"plugin"
 	"github.com/sethgrid/multibar"
-	"strings"
 )
 
 func RunGoSploit() {
@@ -146,8 +145,7 @@ type GosploitModule interface {
 
 func LoadModule(s string) {
 
-	modulepath := strings.TrimSuffix(s, "\n")
-	mod := "./"+modulepath+".so"
+	mod := "./"+s+".so"
 	fmt.Println(mod)
 	// load module
 	// 1. open the so file to load the symbols
