@@ -3,6 +3,8 @@ package main
 
 import (
 	"fmt"
+	"bufio"
+    "os"
 	"github.com/fatih/color"
     "./engine"
 )
