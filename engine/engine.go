@@ -159,7 +159,7 @@ func LoadModule(s string) {
 
 	// 3. Assert that loaded symbol is of a desired type
 	// in this case interface type GosploitModule (defined above)
-	var module GosploitModule
+	//var module GosploitModule
 	module, ok := GosploitModule.(GosploitModule)
 	if !ok {
 		fmt.Println("unexpected type from module symbol")
