@@ -88,8 +88,7 @@ func main() {
 	}
 	close(jobs)
 
-	reader := bufio.NewReader(os.Stdin)
-
+	//Print Welcome Info
 	multiline := `
 	───▄▀▀▀▄▄▄▄▄▄▄▀▀▀▄───
 	───█▒▒░░░░░░░░░▒▒█───
@@ -97,13 +96,14 @@ func main() {
 	─▄▄──█░░░▀█▀░░░█──▄▄─
 	█░░█─▀▄░░░░░░░▄▀─█░░█
 	`
-
 	color.Red(multiline)
-
 	color.Yellow("gosploit >")
-	text, _ := reader.ReadString('\n')
-	if text {
-		engine.LoadModule(text)
-	}
+
+	//Get Module to Load
+	reader := bufio.NewReader(os.Stdin)
+	mod, _ := reader.ReadString('\n')
+
+	//Run Module
+	engine.LoadModule(mod)
 
 }
