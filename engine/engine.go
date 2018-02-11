@@ -12,7 +12,7 @@ import (
 )
 
 func RunGoSploit() {
-	tm.Clear() // Clear current screen
+	//tm.Clear() // Clear current screen
 
 	app := "nmap"
 	//app := "buah"
