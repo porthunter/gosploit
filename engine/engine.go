@@ -147,6 +147,7 @@ type GosploitModule interface {
 func LoadModule(s string) {
 
 	modulepath := strings.TrimSuffix(s, "\n")
+	modulepath := strings.TrimPrefix(modulepath, "use ")
 	var mod string
 
 	switch modulepath {
