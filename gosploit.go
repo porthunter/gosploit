@@ -100,13 +100,16 @@ func main() {
 	█░░█─▀▄░░░░░░░▄▀─█░░█
 	`
 	color.Red(multiline)
-	color.Yellow("gosploit >")
 
-	//Get Module to Load
-	reader := bufio.NewReader(os.Stdin)
-	mod, _ := reader.ReadString('\n')
+	for {
+		color.Yellow("gosploit >")
 
-	//Run Module
-	engine.LoadModule(mod)
+		//Get Module to Load
+		reader := bufio.NewReader(os.Stdin)
+		mod, _ := reader.ReadString('\n')
+
+		//Run Module
+		engine.LoadModule(mod)
+	}
 
 }
