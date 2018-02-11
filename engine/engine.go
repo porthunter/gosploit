@@ -141,7 +141,7 @@ func ProgressBar() {
 
 func LoadModule(s string) {
 
-	mod = "./"+s+".so"
+	mod := "./"+s+".so"
 	fmt.Println(mod)
 	// load module
 	// 1. open the so file to load the symbols
