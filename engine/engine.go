@@ -137,7 +137,3 @@ func ProgressBar() {
 	// continue doing other work
 	fmt.Println("All Bars Complete")
 }
-
-type GosploitModule interface {
-	Exploit()
-}
