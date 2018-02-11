@@ -19,7 +19,7 @@ func RunGoSploit() {
 
 	arg0 := "-sV"
 	arg1 := "-sC"
-	arg2 := "medium.com"
+	arg2 := "127.0.0.1"
 	arg3 := "-p 443"
 
 	cmd := exec.Command(app, arg0, arg1, arg2, arg3)
