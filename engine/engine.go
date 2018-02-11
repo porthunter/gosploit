@@ -8,6 +8,7 @@ import (
 	"time"
 	"plugin"
 	"github.com/sethgrid/multibar"
+	"strings"
 )
 
 func RunGoSploit() {
@@ -137,6 +138,10 @@ func ProgressBar() {
 
 	// continue doing other work
 	fmt.Println("All Bars Complete")
+}
+
+type GosploitModule interface {
+	Exploit()
 }
 
 func LoadModule(s string) {

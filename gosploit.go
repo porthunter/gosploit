@@ -55,9 +55,6 @@ func worker(id int, jobs <-chan int, results chan<- int) {
     }
 }
 
-type GosploitModule interface {
-	Exploit()
-}
 
 func main() {
 
