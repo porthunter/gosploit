@@ -9,7 +9,59 @@ import (
 	"github.com/sethgrid/multibar"
 	"plugin"
 	"strings"
+	"github.com/fatih/color"
+	"github.com/abiosoft/ishell"
+	"../auxiliary"
+	"net/http"
 )
+
+func RunShell() {
+	// create new shell.
+	// by default, new shell includes 'exit', 'help' and 'clear' commands.
+	shell := ishell.New()
+
+	// display welcome info.
+	color.Red("GOSPLOIT V1")
+
+	shell.SetPrompt("gosploit > ")
+
+	// register a function for "greet" command.
+	shell.AddCmd(&ishell.Cmd{
+		Name: "greet",
+		Help: "greet user",
+		Func: func(c *ishell.Context) {
+			c.Println("Hello", strings.Join(c.Args, " "))
+		},
+	})
+
+	// Test shell function
+	shell.AddCmd(&ishell.Cmd{
+		Name: "auxiliary/scanner/xss",
+		Help: "scan targets for xss vulnerabilties",
+		Func: func(c *ishell.Context) {
+			// disable the '>>>' for cleaner same line input.
+			c.ShowPrompt(false)
+			defer c.ShowPrompt(true) // yes, revert after login.
+
+			// get username
+			c.Print("RHOST: ")
+			domain := c.ReadLine()
+
+			auxiliary.XSS_Scan(domain)
+
+			resp, err := http.Get("http://"+domain)
+		   if err != nil {
+			// handle error
+		   }
+		   if resp != nil {
+			   c.Println(resp)
+		   }
+		},
+	})
+
+	// run shell
+	shell.Run()
+}
 
 func RunGoSploit() {
 	//tm.Clear() // Clear current screen
