@@ -8,7 +8,6 @@ import (
     "net/http"
     "os"
 	"github.com/fatih/color"
-	"plugin"
     "./engine"
 )
 
@@ -103,8 +102,6 @@ func main() {
 
 	color.Yellow("gosploit >")
 	text, _ := reader.ReadString('\n')
-	if text != nil {
-		engine.LoadModule(text)
-	}
+	engine.LoadModule(text)
 
 }
