@@ -3,10 +3,10 @@ package main
 import "github.com/gizak/termui"
 
 func main() {
-    if err:=ui.Init(); err != nil {
+    if err:=termui.Init(); err != nil {
         panic(err)
     }
-    defer ui.Close()
+    defer termui.Close()
 
 	bc := termui.NewBarChart()
 	data := []int{3, 2, 5, 3, 9, 5}
@@ -20,7 +20,7 @@ func main() {
 	bc.BarColor = termui.ColorRed
 	bc.NumColor = termui.ColorYellow
 
-    ui.Render(bc)
+    termui.Render(bc)
 
-    ui.Loop()
+    termui.Loop()
 }
