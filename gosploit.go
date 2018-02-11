@@ -2,11 +2,7 @@ package main
 //go build -buildmode=plugin -o modules/test/eng/chi.so modules/test/eng/.go
 
 import (
-	"bufio"
 	"fmt"
-	"time"
-    "net/http"
-    "os"
 	"github.com/fatih/color"
     "./engine"
 )

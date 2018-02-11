@@ -1,6 +1,13 @@
 package main
 
-import "fmt"
+import {
+	"time"
+	"bufio"
+	"net/http"
+	"os"
+	"fmt"
+}
+
 
 type greeting string
 
