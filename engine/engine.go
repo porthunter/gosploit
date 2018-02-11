@@ -25,7 +25,7 @@ func RunShell() {
 	█░░█─▀▄░░░░░░░▄▀─█░░█
 	`
 	color.Red(multiline)
-	
+
 	// create new shell.
 	// by default, new shell includes 'exit', 'help' and 'clear' commands.
 	shell := ishell.New()

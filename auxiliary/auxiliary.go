@@ -2,34 +2,74 @@ package auxiliary
 
 import (
 	"fmt"
-	"os/exec"
-	tm "github.com/buger/goterm"
+	"os"
+	"bufio"
+	"github.com/sethgrid/multibar"
+	"sync"
+	"net/http"
 )
 
+var lines []string
+
+
 func XSS_Scan(target string) {
-	tm.Clear() // Clear current screen
 
-	app := "nmap"
-	//app := "buah"
+	file, err := os.Open("./payloads/excellent.txt")
+    if err != nil {
 
-	arg0 := "-sV"
-	arg1 := "-sC"
-	arg2 := target
+    }
+    defer file.Close()
 
-	cmd := exec.Command(app, arg0, arg1, arg2)
-	stdout, err := cmd.Output()
+    scanner := bufio.NewScanner(file)
+    for scanner.Scan() {
+      lines = append(lines, scanner.Text())
+    }
 
 	if err != nil {
-		println(err.Error())
-		return
+
 	}
 
-	// Create Box with 30% width of current screen, and height of 20 lines
-	box := tm.NewBox(100|tm.PCT, 6, 0)
-	// Add some content to the box
-	// Note that you can add ANY content, even tables
-	fmt.Fprint(box, string(stdout))
-	// Move Box to approx center of the screen
-	tm.Print(tm.MoveTo(box.String(), 0|tm.PCT, 40|tm.PCT))
+
+
+
+	// create the multibar container
+	// this allows our bars to work together without stomping on one another
+	progressBars, _ := multibar.New()
+
+	// some arbitrary totals for our  progress bars
+	// in practice, these could be file sizes or similar
+	largerTotal := len(lines)-1
+
+	barProgress3 := progressBars.MakeBar(largerTotal, "Payloads:")
+
+	// listen in for changes on the progress bars
+	// I should be able to move this into the constructor at some point
+	go progressBars.Listen()
+
+	wg := &sync.WaitGroup{}
+	wg.Add(1)
+
+
+	go func() {
+		for i := 0; i <= len(lines)-1; i++ {
+			barProgress3(i)
+			resp, err := http.Get("http://"+target+"?payload="+lines[i])
+		   if err != nil {
+			// handle error
+		   }
+		   if resp != nil {
+			   //c.Println(resp)
+		   }
+		}
+
+		wg.Done()
+	}()
+
+
+	wg.Wait()
+
+	// continue doing other work
+	fmt.Println("All Bars Complete")
+
 
 }

