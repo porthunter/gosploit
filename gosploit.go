@@ -7,6 +7,7 @@ import (
     "os"
 	"github.com/fatih/color"
 	"github.com/abiosoft/ishell"
+	"strings"
     "./engine"
 )
 
