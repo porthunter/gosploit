@@ -104,7 +104,7 @@ func main() {
 
 	//Get Module to Load
 	reader := bufio.NewReader(os.Stdin)
-	modpathstring, _ := reader.ReadString('\n')
+	mod, _ := reader.ReadString('\n')
 
 	//Run Module
 	engine.LoadModule(mod)
