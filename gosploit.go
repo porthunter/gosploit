@@ -64,7 +64,7 @@ func main() {
 
     //engine.RunGoSploit()
 
-    //fmt.Printf(engine.Reverse("!oG ,olleH"))
+    fmt.Printf(engine.Reverse("!oG ,olleH"))
 
 	lines, err := readLines("../xs2pwn/domains.txt")
 	if err != nil {
@@ -72,7 +72,7 @@ func main() {
 	}
 
 	//Run progress bars
-	engine.ProgressBar()
+	//engine.ProgressBar()
 
 	// In order to use our pool of workers we need to send
 	// them work and collect their results. We make 2
@@ -109,43 +109,6 @@ func main() {
 	modpathstring, _ := reader.ReadString('\n')
 
 	//Run Module
-	//engine.LoadModule(mod)
-
-	modulepath := strings.TrimSuffix(modpathstring, "\n")
-	var mod string
-
-	switch modulepath {
-	case "test/chi/chi":
-		mod = "./modules/test/chi/chi.so"
-	case "test/eng/eng":
-		mod = "./modules/test/eng/eng.so"
-	default:
-		fmt.Println("can't find module")
-	}
-
-	// load module
-	// 1. open the so file to load the symbols
-	plug, err := plugin.Open(mod)
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	// 2. look up a symbol (an exported function or variable)
-	// in this case, variable GosploitModule
-	symGosploitModule, err := plug.Lookup("GosploitModule")
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	// 3. Assert that loaded symbol is of a desired type
-	// in this case interface type GosploitModule (defined above)
-	var module GosploitModule
-	module, ok := symGosploitModule.(GosploitModule)
-	if !ok {
-		fmt.Println("unexpected type from module symbol")
-	}
-
-	// 4. use the module
-	module.Exploit()
+	engine.LoadModule(mod)
 
 }
