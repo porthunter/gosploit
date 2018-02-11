@@ -2,33 +2,18 @@ package auxiliary
 
 import (
 	"fmt"
-	"os"
-	"bufio"
 	"github.com/sethgrid/multibar"
 	"sync"
 	"net/http"
+	"../utility"
 )
-
-var lines []string
-
 
 func XSS_Scan(target string) {
 
-	file, err := os.Open("./payloads/excellent.txt")
-    if err != nil {
-
-    }
-    defer file.Close()
-
-    scanner := bufio.NewScanner(file)
-    for scanner.Scan() {
-      lines = append(lines, scanner.Text())
-    }
-
+	lines, err := utility.ReadLines("./payloads/excellent.txt")
 	if err != nil {
 
 	}
-
 
 
 
