@@ -2,6 +2,7 @@ package engine
 
 import (
 	"fmt"
+	"os/exec"
 	tm "github.com/buger/goterm"
 )
 
@@ -15,6 +16,24 @@ func RunGoSploit() {
 	// Move Box to approx center of the screen
 	tm.Print(tm.MoveTo(box.String(), 0|tm.PCT, 40|tm.PCT))
 	tm.Flush()
+
+	app := "nmap"
+    //app := "buah"
+
+    arg0 := "-sV"
+    arg1 := "-sC"
+    arg2 := "evsec.com"
+    arg3 := "-p 443"
+
+    cmd := exec.Command(app, arg0, arg1, arg2, arg3)
+    stdout, err := cmd.Output()
+
+    if err != nil {
+        println(err.Error())
+        return
+    }
+
+    print(string(stdout))
 }
 
 // Reverse returns its argument string reversed rune-wise left to right.
