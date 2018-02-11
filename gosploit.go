@@ -43,7 +43,7 @@ func main() {
 		switch mod {
 		case "use test/chi/chi\n":
 			engine.LoadModule(mod)
-		case "shell":
+		case "shell\n":
 			// create new shell.
 		    // by default, new shell includes 'exit', 'help' and 'clear' commands.
 		    shell := ishell.New()
