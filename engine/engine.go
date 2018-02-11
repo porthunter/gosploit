@@ -152,7 +152,7 @@ func LoadModule(s string) {
 
 	// 2. look up a symbol (an exported function or variable)
 	// in this case, variable GosploitModule
-	symGosploitModule, err := plug.Lookup("GosploitModule")
+	GosploitModule, err := plug.Lookup("GosploitModule")
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -160,7 +160,7 @@ func LoadModule(s string) {
 	// 3. Assert that loaded symbol is of a desired type
 	// in this case interface type GosploitModule (defined above)
 	var module GosploitModule
-	module, ok := symGosploitModule.(GosploitModule)
+	module, ok := GosploitModule.(GosploitModule)
 	if !ok {
 		fmt.Println("unexpected type from module symbol")
 	}
