@@ -3,20 +3,9 @@ package main
 
 import (
     "./engine"
-	"github.com/fatih/color"
 )
 
 func main() {
-
-	//Print Welcome Info
-	multiline := `
-	───▄▀▀▀▄▄▄▄▄▄▄▀▀▀▄───
-	───█▒▒░░░░░░░░░▒▒█───
-	────█░░█░░░░░█░░█────
-	─▄▄──█░░░▀█▀░░░█──▄▄─
-	█░░█─▀▄░░░░░░░▄▀─█░░█
-	`
-	color.Red(multiline)
 
 	for {
 		engine.RunShell()

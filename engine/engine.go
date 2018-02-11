@@ -16,6 +16,16 @@ import (
 )
 
 func RunShell() {
+	//Print Welcome Info
+	multiline := `
+	───▄▀▀▀▄▄▄▄▄▄▄▀▀▀▄───
+	───█▒▒░░░░░░░░░▒▒█───
+	────█░░█░░░░░█░░█────
+	─▄▄──█░░░▀█▀░░░█──▄▄─
+	█░░█─▀▄░░░░░░░▄▀─█░░█
+	`
+	color.Red(multiline)
+	
 	// create new shell.
 	// by default, new shell includes 'exit', 'help' and 'clear' commands.
 	shell := ishell.New()
