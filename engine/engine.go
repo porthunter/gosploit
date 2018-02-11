@@ -19,7 +19,7 @@ func RunGoSploit() {
 
 	arg0 := "-sV"
 	arg1 := "-sC"
-	arg2 := "evsec.com"
+	arg2 := "medium.com"
 	arg3 := "-p 443"
 
 	cmd := exec.Command(app, arg0, arg1, arg2, arg3)
@@ -183,5 +183,5 @@ func LoadModule(s string) {
 
 	// 4. use the module
 	module.Exploit()
-	
+
 }
