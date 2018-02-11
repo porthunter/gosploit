@@ -157,8 +157,6 @@ func LoadModule(s string) {
 	default:
 		fmt.Println("can't find module")
 	}
-	mod := "./"+s+".so"
-	fmt.Println(mod)
 
 	// load module
 	// 1. open the so file to load the symbols
