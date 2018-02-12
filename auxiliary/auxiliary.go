@@ -40,9 +40,9 @@ func XSS_Scan(target string) {
 		found := 0
 		for i := 0; i <= len(lines)-1; i++ {
 			barProgress3(i)
-			body,err := utility.GetResponseBody("https://"+target+"/?query="+lines[i])
+			body,err := utility.HTTPResponseBodyString("https://"+target+"/?query="+lines[i])
 			if err != nil {
-				
+
 			}
 			if strings.Contains(body, lines[i]) {
 				found++

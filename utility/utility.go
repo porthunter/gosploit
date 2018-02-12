@@ -8,6 +8,7 @@ import (
 )
 
 var lines []string
+var body string
 
 func ReadLines(path string) ([]string, error) {
   file, err := os.Open(path)
@@ -23,11 +24,17 @@ func ReadLines(path string) ([]string, error) {
   return lines, scanner.Err()
 }
 
-func GetResponseBody(url string) (string, error) {
+//Return the string of response body from HTTP request
+func HTTPResponseBodyString(url string) (string, error) {
 	resp, err := http.Get(url)
-    defer resp.Body.Close()
-    buf := new(bytes.Buffer)
-    buf.ReadFrom(resp.Body)
-    body := buf.String()
-  	return body, err
+	if err != nil {
+		body = ""
+	}
+	if resp != nil {
+		defer resp.Body.Close()
+		buf := new(bytes.Buffer)
+	    buf.ReadFrom(resp.Body)
+	    body = buf.String()
+	}
+	return body, err
 }
