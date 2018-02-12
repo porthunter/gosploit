@@ -4,10 +4,8 @@ import (
 	"fmt"
 	"github.com/sethgrid/multibar"
 	"sync"
-	"net/http"
 	"../utility"
 	"strings"
-	"bytes"
 	"github.com/fatih/color"
 )
 
@@ -42,17 +40,10 @@ func XSS_Scan(target string) {
 		found := 0
 		for i := 0; i <= len(lines)-1; i++ {
 			barProgress3(i)
-			resp, err := http.Get("https://"+target+"/?query="+lines[i])
-			defer resp.Body.Close()
-
+			body,err := utility.GetResponseBody("https://"+target+"/?query="+lines[i])
 			if err != nil {
-
+				
 			}
-
-			buf := new(bytes.Buffer)
-		    buf.ReadFrom(resp.Body)
-		    body := buf.String()
-
 			if strings.Contains(body, lines[i]) {
 				found++
 			}
