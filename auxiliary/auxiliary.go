@@ -6,6 +6,9 @@ import (
 	"sync"
 	"net/http"
 	"../utility"
+	"strings"
+	"bytes"
+	"github.com/fatih/color"
 )
 
 func XSS_Scan(target string) {
@@ -36,15 +39,26 @@ func XSS_Scan(target string) {
 
 
 	go func() {
+		found := 0
 		for i := 0; i <= len(lines)-1; i++ {
 			barProgress3(i)
-			resp, err := http.Get("http://"+target+"?payload="+lines[i])
-		   if err != nil {
-			// handle error
-		   }
-		   if resp != nil {
-			   //c.Println(resp)
-		   }
+			resp, err := http.Get("https://"+target+"/?query="+lines[i])
+			defer resp.Body.Close()
+
+			if err != nil {
+
+			}
+
+			buf := new(bytes.Buffer)
+		    buf.ReadFrom(resp.Body)
+		    body := buf.String()
+
+			if strings.Contains(body, lines[i]) {
+				found++
+			}
+		}
+		if found >0 {
+			color.Yellow("[i] Payloads were found in responses, the site could be vulnerable")
 		}
 
 		wg.Done()
@@ -54,7 +68,7 @@ func XSS_Scan(target string) {
 	wg.Wait()
 
 	// continue doing other work
-	fmt.Println("All Bars Complete")
+	fmt.Println("All Tests Complete")
 
 
 }

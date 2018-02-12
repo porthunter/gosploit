@@ -12,7 +12,6 @@ import (
 	"github.com/fatih/color"
 	"github.com/abiosoft/ishell"
 	"../auxiliary"
-	"net/http"
 )
 
 func RunShell() {
@@ -49,23 +48,10 @@ func RunShell() {
 		Name: "auxiliary/scanner/xss",
 		Help: "scan targets for xss vulnerabilties",
 		Func: func(c *ishell.Context) {
-			// disable the '>>>' for cleaner same line input.
-			c.ShowPrompt(false)
-			defer c.ShowPrompt(true) // yes, revert after login.
-
-			// get username
+			// get RHOST
 			c.Print("RHOST: ")
 			domain := c.ReadLine()
-
 			auxiliary.XSS_Scan(domain)
-
-			resp, err := http.Get("http://"+domain)
-		   if err != nil {
-			// handle error
-		   }
-		   if resp != nil {
-			   c.Println(resp)
-		   }
 		},
 	})
 
